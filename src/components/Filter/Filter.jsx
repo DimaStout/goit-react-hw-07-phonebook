@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Filter.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterContacts, getFilter } from '../../redux/sliceFilter';
+import { setFilter, getFilter } from '../../redux/sliceFilter';
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const Filter = () => {
         className={s.inpt}
         type="text"
         value={filter}
-        onChange={event => dispatch(filterContacts(event.target.value.trim()))}
+        onChange={event => dispatch(setFilter(event.target.value.trim()))}
       />
     </>
   );
