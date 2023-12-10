@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './ContactForm.module.css';
 import { useDispatch } from 'react-redux';
-import { addContactAction } from '../../redux/sliceContact';
+import { addContactThunk } from '../../redux/operations';
 import { nanoid } from '@reduxjs/toolkit';
 
 const ContactForm = () => {
@@ -16,7 +16,7 @@ const ContactForm = () => {
       number: event.currentTarget.elements.number.value,
     };
 
-    dispatch(addContactAction(contact));
+    dispatch(addContactThunk(contact));
     event.currentTarget.reset();
   };
 
