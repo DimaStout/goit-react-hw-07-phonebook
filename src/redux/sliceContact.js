@@ -1,4 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+
 import {
   addContactThunk,
   deleteContactThunk,
@@ -55,6 +56,7 @@ export const sliceContact = createSlice({
 });
 
 export const contactReducer = sliceContact.reducer;
-export const { addContact, deleteContact } = sliceContact.actions;
+export const { addContact: addContactAction, deleteContact } =
+  sliceContact.actions;
 
 export const getContacts = state => state.contacts.contacts;
