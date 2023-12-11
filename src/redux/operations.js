@@ -38,5 +38,3 @@ export const deleteContactThunk = createAsyncThunk(
     }
   }
 );
-
-export const getContacts = state => state.contacts.contacts;
