@@ -26,7 +26,10 @@ export const sliceContact = createSlice({
         state.loading = false;
       })
       .addCase(deleteContactThunk.fulfilled, (state, { payload }) => {
-        state.contacts = state.contacts.filter(item => item.id !== payload);
+        const contactIdToDelete = payload;
+        state.contacts = state.contacts.filter(
+          item => item.id !== contactIdToDelete
+        );
         state.loading = false;
       })
       .addMatcher(
@@ -35,7 +38,7 @@ export const sliceContact = createSlice({
           addContactThunk.pending,
           deleteContactThunk.pending
         ),
-        (state, { payload }) => {
+        state => {
           state.loading = true;
           state.error = null;
         }
