@@ -1,5 +1,5 @@
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://6549fab3e182221f8d524207.mockapi.io';
 
@@ -46,7 +46,7 @@ const initialState = {
   filter: '',
 };
 
-export const sliceContact = createSlice({
+const sliceContact = createSlice({
   name: 'contacts',
   initialState,
   reducers: {
@@ -57,35 +57,46 @@ export const sliceContact = createSlice({
       state.contacts = state.contacts.filter(
         item => item.id !== action.payload
       );
+
       state.loading = false;
     },
   },
   extraReducers: builder => {
     builder
-      .addMatcher(
-        isAnyOf(
-          fetchAllContactsThunk.pending,
-          addContactThunk.pending,
-          deleteContactThunk.pending
-        ),
-        (state, { payload }) => {
-          state.loading = true;
-          state.error = null;
-        }
-      )
-      .addMatcher(
-        isAnyOf(
-          fetchAllContactsThunk.rejected,
-          addContactThunk.rejected,
-          deleteContactThunk.rejected
-        ),
-        (state, { payload }) => {
-          state.loading = false;
-          state.error = payload;
-        }
-      );
+      .addCase(fetchAllContactsThunk.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchAllContactsThunk.fulfilled, (state, action) => {
+        state.contacts = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchAllContactsThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(addContactThunk.fulfilled, (state, action) => {
+        state.contacts.push(action.payload);
+        state.loading = false;
+      })
+      .addCase(addContactThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteContactThunk.fulfilled, (state, action) => {
+        state.contacts = state.contacts.filter(
+          item => item.id !== action.payload
+        );
+        state.loading = false;
+      })
+      .addCase(deleteContactThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   },
 });
 
 export const contactReducer = sliceContact.reducer;
-export const { setFilter, deleteContact, getContacts } = sliceContact.actions;
+export const { setFilter, deleteContact } = sliceContact.actions;
+
+export default sliceContact;
