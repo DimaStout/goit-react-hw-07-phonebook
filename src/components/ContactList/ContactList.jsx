@@ -1,14 +1,10 @@
 import React from 'react';
 import s from './ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  deleteContactThunk,
-  getContacts,
-  setFilter,
-} from '../../redux/sliceContact';
+import { deleteContactThunk, setFilter } from '../../redux/sliceContact';
 
 const ContactList = () => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(state => state.contacts.contacts);
   const dispatch = useDispatch();
 
   const onDeleteContact = id => {

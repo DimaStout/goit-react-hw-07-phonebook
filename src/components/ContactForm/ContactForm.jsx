@@ -1,7 +1,6 @@
 import React from 'react';
-import s from './ContactForm.module.css';
 import { useDispatch } from 'react-redux';
-import { addContactThunk } from '../../redux/operations';
+import { addContactThunk } from '../../redux/sliceContact';
 import { nanoid } from '@reduxjs/toolkit';
 
 const ContactForm = () => {
@@ -21,28 +20,16 @@ const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={s.form}>
-      <label className={s.label}>
-        <p className={s.title}>Name</p>
-        <input
-          className={s.input}
-          type="text"
-          name="name"
-          placeholder="Name"
-          required
-        />
+    <form onSubmit={handleSubmit}>
+      <label>
+        <p>Name</p>
+        <input type="text" name="name" placeholder="Name" required />
       </label>
-      <label className={s.label}>
-        <p className={s.title}>Number</p>
-        <input
-          className={s.input}
-          type="tel"
-          name="number"
-          placeholder="Phone Number"
-          required
-        />
+      <label>
+        <p>Number</p>
+        <input type="tel" name="number" placeholder="Phone Number" required />
       </label>
-      <button className={s.button}>Add contact</button>
+      <button type="submit">Add contact</button>
     </form>
   );
 };
