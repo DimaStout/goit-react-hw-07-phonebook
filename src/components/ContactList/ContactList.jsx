@@ -1,23 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import s from './ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-<<<<<<< HEAD
 import { deleteContactThunk, setFilter } from '../../redux/sliceContact';
-=======
 import {
   deleteContactThunk,
   fetchAllContactsThunk,
   getContacts,
 } from '../../redux/sliceContact';
->>>>>>> parent of 57ddb33 (goit-react-hw-07-phonebook-007)
+import { deleteContactThunk, getContacts } from '../../redux/sliceContact';
 
 const ContactList = () => {
   const contacts = useSelector(state => state.contacts.contacts);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchAllContactsThunk());
-  }, [dispatch]);
 
   const onDeleteContact = id => {
     dispatch(deleteContactThunk(id));
