@@ -1,19 +1,11 @@
-import React, { useEffect } from 'react';
 import s from './ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  deleteContactThunk,
-  fetchAllContactsThunk,
-  getContacts,
-} from '../../redux/sliceContact';
+import { deleteContactThunk } from '../../redux/sliceContact';
+import { getContacts } from '../../redux/selectors';
 
 const ContactList = () => {
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchAllContactsThunk());
-  }, [dispatch]);
 
   const onDeleteContact = id => {
     dispatch(deleteContactThunk(id));
