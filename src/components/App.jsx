@@ -3,11 +3,15 @@ import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
 import s from './App.module.css';
 import { fetchAllContactsThunk } from '../redux/operations';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { selectError, selectLoading } from '../redux/selectors';
 
 const App = () => {
   const dispatch = useDispatch();
+
+  const isLoading = useSelector(selectLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchAllContactsThunk());
@@ -18,6 +22,7 @@ const App = () => {
       <ContactForm />
       <h2 className={s.title}>Contacts</h2>
       <Filter />
+      {isLoading && !error && <b>Request in progress...</b>}
       <ContactList />
     </div>
   );
