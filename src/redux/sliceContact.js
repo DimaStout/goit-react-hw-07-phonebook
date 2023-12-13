@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-=======
->>>>>>> parent of c1fcf38 (goit-react-hw-07-phonebook-009)
 import axios from 'axios';
 import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
 
@@ -43,14 +39,13 @@ export const deleteContactThunk = createAsyncThunk(
     }
   }
 );
-=======
+
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import {
   addContactThunk,
   deleteContactThunk,
   fetchAllContactsThunk,
 } from './operations';
->>>>>>> parent of 57ddb33 (goit-react-hw-07-phonebook-007)
 
 const initialState = {
   contacts: [],
@@ -74,7 +69,7 @@ export const sliceContact = createSlice({
   },
   extraReducers: builder => {
     builder
-<<<<<<< HEAD
+
       .addCase(fetchAllContactsThunk.pending, state => {
         state.loading = true;
         state.error = null;
@@ -91,7 +86,7 @@ export const sliceContact = createSlice({
         state.contacts.push(action.payload);
         state.loading = false;
       })
-<<<<<<< HEAD
+
       .addCase(addContactThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
@@ -106,7 +101,7 @@ export const sliceContact = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
-=======
+
       .addCase(deleteContactThunk.fulfilled, (state, { payload }) => {
         const contactIdToDelete = payload;
         state.contacts = state.contacts.filter(
@@ -114,19 +109,14 @@ export const sliceContact = createSlice({
         );
         state.loading = false;
       })
-=======
->>>>>>> parent of c1fcf38 (goit-react-hw-07-phonebook-009)
+
       .addMatcher(
         isAnyOf(
           fetchAllContactsThunk.pending,
           addContactThunk.pending,
           deleteContactThunk.pending
         ),
-<<<<<<< HEAD
         state => {
-=======
-        (state, { payload }) => {
->>>>>>> parent of c1fcf38 (goit-react-hw-07-phonebook-009)
           state.loading = true;
           state.error = null;
         }
@@ -142,20 +132,14 @@ export const sliceContact = createSlice({
           state.error = payload;
         }
       );
-<<<<<<< HEAD
->>>>>>> parent of 57ddb33 (goit-react-hw-07-phonebook-007)
-=======
->>>>>>> parent of c1fcf38 (goit-react-hw-07-phonebook-009)
+
   },
 });
 
 export const contactReducer = sliceContact.reducer;
-<<<<<<< HEAD
-<<<<<<< HEAD
 export const { setFilter, deleteContact } = sliceContact.actions;
 
 export default sliceContact;
-=======
 export const { addContact: addContactAction, deleteContact } =
   sliceContact.actions;
 export {
@@ -164,7 +148,5 @@ export {
   fetchAllContactsThunk,
   getContacts,
 } from './operations';
->>>>>>> parent of 57ddb33 (goit-react-hw-07-phonebook-007)
-=======
+
 export const { setFilter, deleteContact, getContacts } = sliceContact.actions;
->>>>>>> parent of c1fcf38 (goit-react-hw-07-phonebook-009)
